@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧭 Descubra Seu Tipo Profissional — ATPH Holland</title>
+<meta name="description" content="Avaliação gamificada dos Tipos Profissionais de Holland para estudantes do ensino médio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue-dark:#044e6e;--blue-mid:#046c94;--blue-light:#1a8bb5;--green-bright:#98c847;--green-mid:#7cac44;--green-dark:#447c54;--white:#ffffff;--off-white:#f4f8fb;--gray-light:#e8edf2;--gray-mid:#8a9aab;--text-main:#1e2f3a;--text-soft:#4a6070;--accent-warm:#f5a623;--accent-red:#e05c5c;--shadow-soft:0 4px 20px rgba(4,78,110,0.12);--shadow-card:0 2px 12px rgba(4,78,110,0.1);--radius:16px;--radius-sm:8px;--font-main:'Nunito',sans-serif;--font-size-base:1.05rem;--line-height:1.7}
+body.a11y-large{--font-size-base:1.25rem;--line-height:1.9}
+body.a11y-xlarge{--font-size-base:1.5rem;--line-height:2.0}
+body.a11y-high-contrast{--text-main:#000;--text-soft:#000;--off-white:#fff;--gray-light:#e0e0e0;--shadow-soft:none;--shadow-card:none;--blue-mid:#0050a0;--green-bright:#2d7a00;--green-mid:#2d7a00}
+body.a11y-high-contrast .card,body.a11y-high-contrast .option-btn{border:2px solid #000!important}
+body.a11y-dyslexia *{font-family:'OpenDyslexic',monospace!important}
+body.a11y-no-anim *{animation:none!important;transition:none!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-main);font-size:var(--font-size-base);line-height:var(--line-height);color:var(--text-main);background:var(--off-white);min-height:100vh}
+.skip-link{position:absolute;top:-100px;left:1rem;background:var(--blue-mid);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-weight:700;z-index:9999;transition:top .2s}
+.skip-link:focus{top:1rem}
+.app-wrapper{max-width:860px;margin:0 auto;padding:1rem;min-height:100vh}
+
+/* HEADER */
+.site-header{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue-mid) 100%);color:var(--white);padding:1rem 1.5rem;border-radius:0 0 var(--radius) var(--radius);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-soft)}
+.brand{display:flex;align-items:center;gap:.75rem}
+.brand-logo{width:50px;height:50px;background:rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-text h1{font-size:1.15rem;font-weight:900;letter-spacing:-.02em}
+.brand-text p{font-size:.78rem;opacity:.85}
+.a11y-toggle-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);color:var(--white);border-radius:var(--radius-sm);padding:.4rem .8rem;font-family:var(--font-main);font-size:.85rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:background .2s}
+.a11y-toggle-btn:hover{background:rgba(255,255,255,.25)}
+.a11y-toggle-btn:focus-visible{outline:3px solid var(--green-bright);outline-offset:2px}
+.a11y-toggle-btn svg{width:20px;height:20px;flex-shrink:0}
+
+/* A11Y PANEL */
+.a11y-panel{background:var(--white);border:2px solid var(--blue-mid);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem;box-shadow:var(--shadow-soft);display:none}
+.a11y-panel.open{display:block;animation:fadeIn .25s ease}
+.a11y-panel h2{font-size:1rem;font-weight:800;color:var(--blue-mid);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.a11y-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem}
+.a11y-item label{display:flex;align-items:center;gap:.6rem;font-weight:600;cursor:pointer;font-size:.95rem}
+.a11y-item input[type=checkbox]{width:20px;height:20px;accent-color:var(--blue-mid);cursor:pointer}
+.font-size-controls{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.font-btn{background:var(--gray-light);border:1.5px solid var(--gray-mid);border-radius:var(--radius-sm);padding:.3rem .7rem;font-family:var(--font-main);font-weight:700;cursor:pointer;transition:all .2s;color:var(--text-main)}
+.font-btn:hover,.font-btn.active{background:var(--blue-mid);border-color:var(--blue-mid);color:white}
+
+/* SCREENS */
+.screen{display:none}
+.screen.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
+.card{background:var(--white);border-radius:var(--radius);padding:1.75rem;box-shadow:var(--shadow-card);margin-bottom:1.25rem}
+.card-accent{border-left:5px solid var(--green-bright)}
+
+/* PROGRESS */
+.progress-container{background:var(--white);border-radius:var(--radius);padding:1rem 1.5rem;box-shadow:var(--shadow-card);margin-bottom:1.25rem}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;font-weight:700;font-size:.9rem;color:var(--text-soft)}
+.progress-bar-track{height:12px;background:var(--gray-light);border-radius:100px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--blue-mid),var(--green-bright));border-radius:100px;transition:width .5s cubic-bezier(.34,1.56,.64,1)}
+.progress-steps{display:flex;gap:.4rem;margin-top:.75rem;flex-wrap:wrap}
+.step-dot{width:28px;height:28px;border-radius:50%;background:var(--gray-light);border:2px solid var(--gray-mid);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:var(--gray-mid);transition:all .3s}
+.step-dot.done{background:var(--green-bright);border-color:var(--green-mid);color:white}
+.step-dot.current{background:var(--blue-mid);border-color:var(--blue-dark);color:white;transform:scale(1.2)}
+
+/* HERO */
+.hero-banner{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue-mid) 60%,var(--green-mid) 100%);color:var(--white);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.hero-banner::before{content:'';position:absolute;top:-30%;right:-10%;width:250px;height:250px;background:rgba(152,200,71,.15);border-radius:50%}
+.hero-emoji{font-size:4rem;margin-bottom:.75rem;display:block;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-banner h2{font-size:1.9rem;font-weight:900;margin-bottom:.5rem;line-height:1.2}
+.hero-banner p{font-size:1.05rem;opacity:.9;max-width:500px;margin:0 auto}
+.riasec-chips{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin:1.25rem 0 0}
+.riasec-chip{padding:.35rem .9rem;border-radius:100px;font-size:.85rem;font-weight:800;color:var(--white);opacity:.9}
+
+/* REASSURANCE */
+.reassure-box{background:linear-gradient(135deg,#e8f5e2,#f0f9ff);border:2px solid var(--green-bright);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-top:.75rem;display:flex;gap:.8rem;align-items:flex-start}
+.reassure-box .ri{font-size:1.8rem;flex-shrink:0;line-height:1}
+.reassure-box p{font-size:.88rem;color:var(--green-dark);font-weight:600;line-height:1.55}
+.reassure-box strong{color:var(--blue-dark)}
+
+/* FORM */
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-weight:700;margin-bottom:.4rem;color:var(--text-main);font-size:.95rem}
+.form-group input[type=text],.form-group select{width:100%;padding:.75rem 1rem;border:2px solid var(--gray-light);border-radius:var(--radius-sm);font-family:var(--font-main);font-size:var(--font-size-base);color:var(--text-main);background:var(--white);transition:border-color .2s,box-shadow .2s;appearance:none}
+.form-group input[type=text]:focus,.form-group select:focus{outline:none;border-color:var(--blue-mid);box-shadow:0 0 0 3px rgba(4,108,148,.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 2rem;border-radius:100px;font-family:var(--font-main);font-size:1rem;font-weight:800;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,var(--blue-mid),var(--blue-dark));color:var(--white);box-shadow:0 4px 16px rgba(4,78,110,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(4,78,110,.4)}
+.btn-green{background:linear-gradient(135deg,var(--green-bright),var(--green-mid));color:var(--white);box-shadow:0 4px 16px rgba(124,172,68,.35)}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(124,172,68,.5)}
+.btn-ghost{background:transparent;color:var(--blue-mid);border:2px solid var(--blue-mid)}
+.btn-ghost:hover{background:var(--blue-mid);color:white}
+.btn:focus-visible{outline:3px solid var(--green-bright);outline-offset:3px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-full{width:100%}
+
+/* TYPE CARDS */
+.type-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;margin:1.25rem 0}
+.type-card{border-radius:var(--radius);padding:1.25rem;border-left:6px solid;background:var(--white);box-shadow:var(--shadow-card);transition:transform .2s}
+.type-card:hover{transform:translateY(-3px)}
+.type-card .type-emoji{font-size:2.2rem;margin-bottom:.5rem;display:block}
+.type-card .type-name{font-size:1.05rem;font-weight:900;margin-bottom:.3rem}
+.type-card .type-desc{font-size:.88rem;color:var(--text-soft);line-height:1.5}
+.type-card .type-example{margin-top:.6rem;font-size:.8rem;font-weight:700;padding:.3rem .6rem;border-radius:var(--radius-sm);display:inline-block}
+.type-R{border-color:#e07b39}.type-R .type-example{background:#fff3ec;color:#e07b39}
+.type-I{border-color:var(--blue-mid)}.type-I .type-example{background:#e8f4fb;color:var(--blue-mid)}
+.type-A{border-color:#9b59b6}.type-A .type-example{background:#f5ecfc;color:#9b59b6}
+.type-S{border-color:#e74c3c}.type-S .type-example{background:#fef0ef;color:#e74c3c}
+.type-E{border-color:var(--accent-warm)}.type-E .type-example{background:#fff8e6;color:#b07d00}
+.type-C{border-color:var(--green-mid)}.type-C .type-example{background:#edfaf0;color:var(--green-dark)}
+
+/* ALERT */
+.alert-box{background:linear-gradient(135deg,#fff3cd,#ffe8a0);border:2px solid var(--accent-warm);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0;position:relative}
+.alert-box::before{content:'💡';position:absolute;top:-15px;left:20px;font-size:1.8rem;background:white;padding:0 4px;border-radius:50%}
+.alert-box h3{font-size:1.05rem;font-weight:900;margin-bottom:.5rem;color:#7a5500}
+.alert-box p{font-size:.93rem;color:#5a4000;line-height:1.6}
+
+/* QUIZ */
+.section-header{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;color:white;border-radius:var(--radius);margin-bottom:1.25rem}
+.section-icon{width:56px;height:56px;background:rgba(255,255,255,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.section-header h2{font-size:1.3rem;font-weight:900;margin-bottom:.2rem}
+.section-header p{font-size:.88rem;opacity:.85}
+.instruction-band{background:rgba(152,200,71,.12);border:1.5px solid var(--green-bright);border-radius:var(--radius-sm);padding:.75rem 1.1rem;font-size:.9rem;font-weight:600;color:var(--green-dark);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.question-card{background:var(--white);border-radius:var(--radius);padding:1.25rem 1.5rem;box-shadow:var(--shadow-card);margin-bottom:.9rem;border-left:4px solid var(--blue-mid);transition:box-shadow .2s}
+.question-card:focus-within{box-shadow:0 0 0 3px rgba(4,108,148,.2),var(--shadow-card)}
+.question-num{font-size:.75rem;font-weight:800;color:var(--gray-mid);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+.question-text{font-size:.95rem;font-weight:600;color:var(--text-main);margin-bottom:.85rem;line-height:1.5}
+.likert-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text-soft);font-weight:700;margin-bottom:.4rem;padding:0 2px}
+.likert-scale{display:flex;gap:.5rem}
+/* 4-option buttons */
+.option-btn{flex:1;padding:.65rem .2rem;border:2px solid var(--gray-light);border-radius:10px;background:var(--white);font-family:var(--font-main);font-size:.88rem;font-weight:800;color:var(--text-soft);cursor:pointer;transition:all .15s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.option-btn .oe{font-size:1.2rem}
+.option-btn:hover{border-color:var(--blue-mid);background:rgba(4,108,148,.06);color:var(--blue-mid)}
+.option-btn.selected{border-color:var(--blue-mid);background:var(--blue-mid);color:white;transform:scale(1.07)}
+.option-btn:focus-visible{outline:3px solid var(--green-bright);outline-offset:2px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
+.questions-answered{font-size:.85rem;color:var(--text-soft);font-weight:600}
+
+/* RESULTS */
+.results-hero{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue-mid) 50%,var(--green-mid) 100%);color:white;text-align:center;padding:2.5rem 1.5rem;border-radius:var(--radius);margin-bottom:1.5rem}
+.code-reveal{font-size:3.5rem;font-weight:900;letter-spacing:.2em;margin:.75rem 0;text-shadow:0 2px 8px rgba(0,0,0,.2);animation:popIn .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.chart-container{background:var(--white);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-card);margin-bottom:1.25rem}
+.chart-title{font-size:1rem;font-weight:800;color:var(--blue-mid);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+.bar-chart{display:flex;flex-direction:column;gap:.75rem}
+.bar-row{display:flex;align-items:center;gap:.75rem}
+.bar-label{width:130px;font-size:.85rem;font-weight:700;flex-shrink:0;color:var(--text-main)}
+.bar-track{flex:1;height:22px;background:var(--gray-light);border-radius:100px;overflow:hidden}
+.bar-fill{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;padding-left:8px;color:white;font-size:.7rem;font-weight:800}
+.bar-score{font-size:.82rem;font-weight:800;color:var(--text-soft);width:35px;text-align:right}
+.result-type-section{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-card);overflow:hidden;margin-bottom:1.25rem}
+.result-type-header{padding:1.25rem 1.5rem;color:white;display:flex;align-items:center;gap:1rem}
+.rank-badge{width:42px;height:42px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;flex-shrink:0}
+.type-info h3{font-size:1.15rem;font-weight:900}.type-info p{font-size:.82rem;opacity:.9}
+.result-type-body{padding:1.25rem 1.5rem}
+.professions-group{margin-bottom:1.25rem}
+.professions-group h4{font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+.profession-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.prof-chip{padding:.3rem .7rem;border-radius:100px;font-size:.82rem;font-weight:700;background:var(--gray-light);color:var(--text-main)}
+.future-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.75rem;font-weight:800;background:linear-gradient(135deg,var(--blue-mid),var(--green-mid));color:white;padding:.2rem .6rem;border-radius:100px;margin-left:.4rem}
+.mindset-card{background:linear-gradient(135deg,#f0f9ff,#e8f5e2);border:2px solid var(--green-bright);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem}
+.mindset-card .story-chars{font-size:2.5rem;text-align:center;margin-bottom:.75rem}
+.mindset-card h3{text-align:center;font-size:1.05rem;font-weight:900;color:var(--blue-dark);margin-bottom:.75rem}
+.mindset-card p{font-size:.9rem;color:var(--text-main);line-height:1.65}
+.link-cards-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.75rem;margin:1.25rem 0}
+.link-card{background:var(--white);border-radius:var(--radius);padding:1.25rem;box-shadow:var(--shadow-card);border:2px solid var(--gray-light);transition:all .2s;text-decoration:none;color:inherit;display:block}
+.link-card:hover{border-color:var(--blue-mid);transform:translateY(-2px);box-shadow:var(--shadow-soft)}
+.link-card .lci{font-size:2rem;margin-bottom:.5rem;display:block}
+.link-card .lct{font-size:.9rem;font-weight:800;color:var(--blue-mid);margin-bottom:.3rem}
+.link-card .lcd{font-size:.8rem;color:var(--text-soft)}
+.xp-flash{position:fixed;bottom:2rem;right:2rem;background:var(--green-bright);color:white;padding:.75rem 1.25rem;border-radius:var(--radius);font-weight:900;font-size:1.1rem;box-shadow:var(--shadow-soft);animation:slideUp 2.2s ease forwards;z-index:1000;pointer-events:none}
+@keyframes slideUp{0%{opacity:0;transform:translateY(20px)}20%{opacity:1;transform:translateY(0)}80%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-10px)}}
+.save-status{text-align:center;padding:1rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem;margin-top:1rem}
+.save-status.saving{background:#e8f4fb;color:var(--blue-mid)}
+.save-status.success{background:#edfaf0;color:var(--green-dark)}
+.save-status.error{background:#fef0ef;color:#c0392b}
+@media(max-width:600px){.hero-banner h2{font-size:1.4rem}.type-cards-grid{grid-template-columns:1fr}.code-reveal{font-size:2.5rem}.card{padding:1.25rem}.option-btn{font-size:.8rem}.section-header{flex-direction:column;text-align:center}.bar-label{width:90px;font-size:.78rem}}
+.mt1{margin-top:.5rem}.mt2{margin-top:1rem}.mb1{margin-bottom:.5rem}.mb2{margin-bottom:1rem}.fw9{font-weight:900}.cb{color:var(--blue-mid)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+hr{border:none;border-top:2px solid var(--gray-light);margin:1.25rem 0}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Pular para o conteúdo principal</a>
+<div class="app-wrapper" id="main">
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" role="banner">
+  <div class="brand">
+    <div class="brand-logo" aria-hidden="true">
+      <!-- Hexágono RIASEC -->
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="42" height="42" aria-hidden="true">
+        <!-- Hexagon: flat-top, 6 vertices -->
+        <polygon points="40,6 70,23 70,57 40,74 10,57 10,23"
+                 fill="none" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+        <!-- Internal connecting lines (star pattern) -->
+        <line x1="40" y1="6"  x2="70" y2="57" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+        <line x1="70" y1="23" x2="10" y2="57" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+        <line x1="70" y1="57" x2="10" y2="23" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+        <line x1="40" y1="74" x2="40" y2="6"  stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+        <line x1="10" y1="23" x2="70" y2="23" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+        <line x1="10" y1="57" x2="70" y2="57" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+        <!-- Letters at each vertex -->
+        <text x="40" y="4"  text-anchor="middle" dominant-baseline="auto"   font-family="Nunito,sans-serif" font-size="11" font-weight="900" fill="#98c847">R</text>
+        <text x="73" y="26" text-anchor="start"  dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="900" fill="#98c847">I</text>
+        <text x="73" y="59" text-anchor="start"  dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="900" fill="#98c847">A</text>
+        <text x="40" y="80" text-anchor="middle" dominant-baseline="auto"   font-family="Nunito,sans-serif" font-size="11" font-weight="900" fill="#98c847">S</text>
+        <text x="7"  y="59" text-anchor="end"    dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="900" fill="#98c847">E</text>
+        <text x="7"  y="26" text-anchor="end"    dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="900" fill="#98c847">C</text>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <h1>Descubra Seu Tipo Profissional</h1>
+      <p>Avaliação ATPH — Tipologia de Holland (RIASEC)</p>
+    </div>
+  </div>
+  <button class="a11y-toggle-btn" id="a11yToggleBtn" aria-expanded="false" aria-controls="a11yPanel">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="40" cy="40" r="37" fill="none" stroke="white" stroke-width="6"/>
+      <circle cx="40" cy="15" r="8" fill="#98c847"/>
+      <circle cx="13" cy="35" r="5" fill="#98c847"/>
+      <circle cx="67" cy="35" r="5" fill="#98c847"/>
+      <path d="M13 35 Q40 28 67 35" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="40" y1="30" x2="26" y2="62" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="40" y1="30" x2="54" y2="62" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="26" cy="64" r="5" fill="#98c847"/>
+      <circle cx="54" cy="64" r="5" fill="#98c847"/>
+      <path d="M26 64 Q40 74 54 64" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    Acessibilidade
+  </button>
+</header>
+
+<!-- ===== A11Y PANEL ===== -->
+<div id="a11yPanel" class="a11y-panel" role="region" aria-label="Configurações de acessibilidade">
+  <h2>
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="22" height="22" aria-hidden="true">
+      <circle cx="40" cy="40" r="37" fill="none" stroke="#046c94" stroke-width="6"/>
+      <circle cx="40" cy="15" r="8" fill="#98c847"/>
+      <circle cx="13" cy="35" r="5" fill="#046c94"/><circle cx="67" cy="35" r="5" fill="#046c94"/>
+      <path d="M13 35 Q40 28 67 35" fill="none" stroke="#046c94" stroke-width="6" stroke-linecap="round"/>
+      <line x1="40" y1="30" x2="26" y2="62" stroke="#046c94" stroke-width="6" stroke-linecap="round"/>
+      <line x1="40" y1="30" x2="54" y2="62" stroke="#046c94" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="26" cy="64" r="5" fill="#046c94"/><circle cx="54" cy="64" r="5" fill="#046c94"/>
+      <path d="M26 64 Q40 74 54 64" fill="none" stroke="#046c94" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    Configurações de Acessibilidade
+  </h2>
+  <div class="a11y-grid">
+    <div class="a11y-item"><label><input type="checkbox" id="chkHC" onchange="applyA11y()"> 🌓 Alto contraste</label></div>
+    <div class="a11y-item"><label><input type="checkbox" id="chkDy" onchange="applyA11y()"> 📖 Fonte para dislexia</label></div>
+    <div class="a11y-item"><label><input type="checkbox" id="chkNA" onchange="applyA11y()"> ⏸️ Sem animações</label></div>
+  </div>
+  <div style="margin-top:1rem">
+    <p style="font-size:.85rem;font-weight:700;color:var(--text-soft);margin-bottom:.5rem">Tamanho da fonte:</p>
+    <div class="font-size-controls">
+      <button class="font-btn active" id="fN" onclick="setFont('n')" aria-pressed="true">A normal</button>
+      <button class="font-btn" id="fL" onclick="setFont('l')" aria-pressed="false">A+ grande</button>
+      <button class="font-btn" id="fX" onclick="setFont('x')" aria-pressed="false">A++ maior</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: WELCOME ===== -->
+<main id="sWelcome" class="screen active" role="main">
+  <div class="hero-banner" role="banner">
+    <span class="hero-emoji" aria-hidden="true">🧭</span>
+    <h2>Qual é o seu perfil profissional?</h2>
+    <p>Uma aventura de autoconhecimento para descobrir quais áreas profissionais combinam com <strong>você</strong>!</p>
+    <div class="riasec-chips" aria-label="Os 6 tipos de Holland">
+      <span class="riasec-chip" style="background:#e07b39">🔧 Realista</span>
+      <span class="riasec-chip" style="background:#046c94">🔬 Investigativo</span>
+      <span class="riasec-chip" style="background:#9b59b6">🎨 Artístico</span>
+      <span class="riasec-chip" style="background:#e74c3c">🤝 Social</span>
+      <span class="riasec-chip" style="background:#f5a623">💼 Empreendedor</span>
+      <span class="riasec-chip" style="background:#447c54">📊 Convencional</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="fw9 cb mb2" style="font-size:1.1rem">📋 Suas Informações</h2>
+    <div class="form-group">
+      <label for="iNome">Nome completo <span style="color:var(--accent-red)">*</span></label>
+      <input type="text" id="iNome" placeholder="Ex: Ana Paula dos Santos" autocomplete="name" required aria-required="true">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="iRA">RA (Registro do Aluno) <span style="color:var(--accent-red)">*</span></label>
+        <input type="text" id="iRA" placeholder="Ex: 239104" required aria-required="true">
+      </div>
+      <div class="form-group">
+        <label for="sTurma">Turma <span style="color:var(--accent-red)">*</span></label>
+        <select id="sTurma" required aria-required="true">
+          <option value="" disabled selected>Selecione sua turma</option>
+          <option value="I3A">I3A</option>
+          <option value="I3B">I3B</option>
+          <option value="M3A">M3A</option>
+          <option value="M3B">M3B</option>
+          <option value="M3C">M3C</option>
+        </select>
+      </div>
+    </div>
+    <div id="formErr" style="color:var(--accent-red);font-size:.88rem;font-weight:700;margin-bottom:.75rem;display:none" role="alert">
+      ⚠️ Por favor, preencha todos os campos antes de continuar.
+    </div>
+    <button class="btn btn-primary btn-full" onclick="startIntro()" style="font-size:1.1rem;padding:1rem">
+      Começar a aventura! 🚀
+    </button>
+    <p style="text-align:center;font-size:.82rem;color:var(--text-soft);margin-top:.6rem">
+      ⏱️ Tempo estimado: 20–30 minutos &nbsp;|&nbsp; 154 afirmações ao total
+    </p>
+
+  </div>
+</main>
+
+<!-- ===== SCREEN: INTRO ===== -->
+<main id="sIntro" class="screen" role="main">
+  <div class="card">
+    <h2 class="fw9 cb mb2" style="font-size:1.3rem">🗺️ Antes de começar: o que é a Tipologia de Holland?</h2>
+    <p class="mb2">
+      O psicólogo <strong>John Holland</strong> passou anos estudando como as pessoas escolhem suas profissões.
+      Ele descobriu que existem <strong>6 tipos de personalidade profissional</strong> — e a maioria das pessoas
+      tem características de 2 ou 3 tipos misturados!
+    </p>
+    <div class="alert-box" role="note">
+      <h3>🎯 Ter habilidade ≠ Ter vontade!</h3>
+      <p>
+        Imagine a <strong>Mariana</strong>: ela é ótima em matemática e seus professores vivem dizendo que ela deveria ser engenheira.
+        Mas Mariana <em>odeia</em> ficar sozinha com máquinas e adora ajudar pessoas. Ela descobriu que seu perfil é
+        Social — e hoje é uma assistente social incrível! 💚
+      </p>
+      <p class="mt1">
+        <strong>Ser bom em algo não significa que você vai ser feliz fazendo isso todo dia.</strong>
+        Esta avaliação mede seus <em>interesses</em>, não suas habilidades. Seja honesto!
+      </p>
+    </div>
+    <p class="mb2 mt2">Conheça os 6 tipos:</p>
+  </div>
+
+  <div class="type-cards-grid" role="list" aria-label="Os 6 tipos profissionais de Holland">
+    <div class="type-card type-R" role="listitem">
+      <span class="type-emoji">🔧</span>
+      <div class="type-name">R — Realista</div>
+      <div class="type-desc">Gosta de trabalhar com as mãos, máquinas, ferramentas e objetos concretos. Prefere ação a conversa.</div>
+      <span class="type-example">Ex: "Adoro consertar coisas!"</span>
+    </div>
+    <div class="type-card type-I" role="listitem">
+      <span class="type-emoji">🔬</span>
+      <div class="type-name">I — Investigativo</div>
+      <div class="type-desc">Curioso por natureza! Ama pesquisar, analisar, resolver enigmas e entender como o mundo funciona.</div>
+      <span class="type-example">Ex: "Por que o céu é azul?"</span>
+    </div>
+    <div class="type-card type-A" role="listitem">
+      <span class="type-emoji">🎨</span>
+      <div class="type-name">A — Artístico</div>
+      <div class="type-desc">Criativo e expressivo. Adora arte, música, teatro, escrita. Prefere liberdade a regras fixas.</div>
+      <span class="type-example">Ex: "Preciso criar algo novo!"</span>
+    </div>
+    <div class="type-card type-S" role="listitem">
+      <span class="type-emoji">🤝</span>
+      <div class="type-name">S — Social</div>
+      <div class="type-desc">Ama pessoas! Quer ensinar, ajudar, aconselhar. Sente-se realizado quando faz diferença na vida de alguém.</div>
+      <span class="type-example">Ex: "Quero ajudar as pessoas!"</span>
+    </div>
+    <div class="type-card type-E" role="listitem">
+      <span class="type-emoji">💼</span>
+      <div class="type-name">E — Empreendedor</div>
+      <div class="type-desc">Líder nato! Gosta de convencer, liderar equipes, fazer negócios e alcançar resultados grandes.</div>
+      <span class="type-example">Ex: "Quero comandar minha empresa!"</span>
+    </div>
+    <div class="type-card type-C" role="listitem">
+      <span class="type-emoji">📊</span>
+      <div class="type-name">C — Convencional</div>
+      <div class="type-desc">Organizado e detalhista. Gosta de dados, planilhas, normas e trabalhos estruturados com clareza.</div>
+      <span class="type-example">Ex: "Tudo no seu lugar!"</span>
+    </div>
+  </div>
+
+  <div class="card card-accent">
+    <h3 class="fw9 mb1" style="font-size:1rem">🎮 Como funciona esta avaliação?</h3>
+    <p class="mb1" style="font-size:.93rem">
+      Você verá <strong>154 afirmações</strong> divididas em <strong>6 fases</strong> (uma para cada tipo RIASEC).
+      Para cada afirmação, escolha o quanto aquela atividade te interessa usando <strong>4 opções</strong>:
+    </p>
+    <p style="font-size:.95rem;font-weight:700;margin-bottom:.75rem;color:var(--blue-mid)">
+      1 = Nenhum interesse &nbsp;&nbsp; 2 = Pouco interesse &nbsp;&nbsp; 3 = Bastante interesse &nbsp;&nbsp; 4 = Muito interesse
+    </p>
+    <p style="font-size:.93rem">
+      ✅ Não existe resposta certa ou errada!<br>
+      ✅ Responda pelo que você <em>genuinamente</em> curte fazer — sem pensar no que seria "melhor"<br>
+      ✅ Ao final, você recebe seu <strong>Código RIASEC</strong> personalizado com profissões que combinam com você
+    </p>
+  </div>
+  <div class="nav-footer">
+    <button class="btn btn-ghost" onclick="showScreen('sWelcome')">← Voltar</button>
+    <button class="btn btn-green" onclick="startAssessment()">Começar! 🎯</button>
+  </div>
+</main>
+
+<!-- ===== SCREEN: QUIZ ===== -->
+<main id="sQuiz" class="screen" role="main">
+  <div class="progress-container" aria-live="polite" aria-atomic="true">
+    <div class="progress-header">
+      <span id="progLabel">Fase 1 de 6</span>
+      <span id="progPct">0%</span>
+    </div>
+    <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progBar">
+      <div class="progress-bar-fill" id="progFill" style="width:0%"></div>
+    </div>
+    <div class="progress-steps" aria-label="Fases do questionário">
+      <div class="step-dot current" id="d0">R</div>
+      <div class="step-dot" id="d1">I</div>
+      <div class="step-dot" id="d2">A</div>
+      <div class="step-dot" id="d3">S</div>
+      <div class="step-dot" id="d4">E</div>
+      <div class="step-dot" id="d5">C</div>
+    </div>
+  </div>
+
+  <div id="qHeader"></div>
+  <div id="qInstr" class="instruction-band">
+    ⭐ Marque o quanto cada atividade te interessa: &nbsp;<strong>1=Nenhum &nbsp; 2=Pouco &nbsp; 3=Bastante &nbsp; 4=Muito</strong>
+  </div>
+  <div id="qList"></div>
+
+  <div class="nav-footer">
+    <button class="btn btn-ghost" id="btnPrev" onclick="prevSec()" style="display:none">← Fase anterior</button>
+    <div class="questions-answered" id="ansCount" aria-live="polite"></div>
+    <button class="btn btn-primary" id="btnNext" onclick="nextSec()">Próxima fase →</button>
+  </div>
+</main>
+
+<!-- ===== SCREEN: RESULTS ===== -->
+<main id="sResults" class="screen" role="main" aria-label="Resultados da avaliação">
+  <div class="results-hero">
+    <div style="font-size:3rem;margin-bottom:.5rem" aria-hidden="true">🎉</div>
+    <h2 style="font-size:1.5rem;font-weight:900;margin-bottom:.3rem">Seu Código Profissional RIASEC:</h2>
+    <div class="code-reveal" id="riasecCode" aria-live="polite"></div>
+    <p style="opacity:.85;font-size:.95rem" id="resSub"></p>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">📊 Seus resultados por tipo (escala 1,00 – 4,00)</div>
+    <div class="bar-chart" id="barChart" role="img" aria-label="Gráfico de barras com pontuação por tipo Holland"></div>
+  </div>
+
+  <div class="mindset-card" role="note">
+    <div class="story-chars" aria-hidden="true">🌱 💡 🌟</div>
+    <h3>⚠️ Importante: pontuação alta não significa obrigação!</h3>
+    <p>
+      Imagine que você tirou nota alta no tipo Realista — isso <strong>não quer dizer</strong> que você <em>deve</em>
+      ser mecânico ou engenheiro. Pense assim: você pode adorar cozinhar (habilidade), mas não quer ser
+      chef todo dia (interesse). 🍳 São coisas diferentes!
+    </p>
+    <p class="mt1">
+      Este resultado é um <strong>mapa do tesouro</strong>, não um caminho obrigatório.
+      Use-o para <em>explorar possibilidades</em> e se conhecer melhor.
+      O autoconhecimento é a bússola mais poderosa que você tem! 🧭
+    </p>
+    <p class="mt1">
+      Pessoas com perfis <strong>misturados</strong> (ex: Investigativo + Artístico) costumam se destacar
+      em áreas inovadoras — porque combinam competências de mundos diferentes! 🔥
+    </p>
+  </div>
+
+  <h2 style="font-size:1.1rem;font-weight:900;color:var(--blue-mid);margin-bottom:1rem">
+    🏆 Seus 3 principais perfis e as profissões que combinam com você
+  </h2>
+  <div id="top3Container"></div>
+
+  <h2 style="font-size:1.05rem;font-weight:900;color:var(--blue-mid);margin:1.5rem 0 .75rem">
+    🌐 Explore ainda mais sobre você e sua carreira
+  </h2>
+  <div class="link-cards-row">
+    <a href="https://www.onetonline.org/" target="_blank" rel="noopener noreferrer" class="link-card">
+      <span class="lci">🌐</span>
+      <div class="lct">O*NET Online</div>
+      <div class="lcd">O maior banco de dados de ocupações do mundo. Explore centenas de carreiras detalhadas.</div>
+    </a>
+    <a href="https://www.guiadoestudante.com.br/escolha-seu-curso/" target="_blank" rel="noopener noreferrer" class="link-card">
+      <span class="lci">📚</span>
+      <div class="lct">Guia do Estudante</div>
+      <div class="lcd">Explore cursos universitários e profissões no Brasil de forma detalhada.</div>
+    </a>
+    <a href="https://www.ciee.org.br/" target="_blank" rel="noopener noreferrer" class="link-card">
+      <span class="lci">💼</span>
+      <div class="lct">CIEE Orientação</div>
+      <div class="lcd">Estágios e orientação profissional gratuita para jovens do ensino médio.</div>
+    </a>
+    <a href="https://www.bls.gov/ooh/" target="_blank" rel="noopener noreferrer" class="link-card">
+      <span class="lci">📈</span>
+      <div class="lct">Occupational Outlook</div>
+      <div class="lcd">Dados de crescimento de carreiras para os próximos 10 anos (inglês).</div>
+    </a>
+  </div>
+
+  <div id="saveStatus" class="save-status" role="status" aria-live="polite" style="display:none"></div>
+
+  <div class="nav-footer" style="margin-top:1.5rem">
+    <button class="btn btn-ghost" onclick="restartQuiz()">🔄 Refazer avaliação</button>
+    <button class="btn btn-primary" onclick="window.print()">🖨️ Salvar / Imprimir</button>
+  </div>
+</main>
+
+</div><!-- app-wrapper -->
+
+<script>
+/* ===== CONFIG ===== */
+const SHEETS_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+
+/* ===== ESCALA LIKERT — 4 opções (instrumento original ATPH) ===== */
+const LIKERT = [
+  { value:1, label:'1', emoji:'😐', title:'Nenhum interesse' },
+  { value:2, label:'2', emoji:'🙂', title:'Pouco interesse'  },
+  { value:3, label:'3', emoji:'😊', title:'Bastante interesse'},
+  { value:4, label:'4', emoji:'🤩', title:'Muito interesse'  },
+];
+
+/* ===== SEÇÕES — questões EXATAS do instrumento ATPH Holland ===== */
+const SECTIONS = [
+  { id:'R', name:'Realista', emoji:'🔧', color:'#e07b39',
+    hBg:'linear-gradient(135deg,#c0562a,#e07b39)',
+    desc:'Atividades com máquinas, ferramentas e objetos concretos',
+    q:[
+      'Saber consertar aparelhos eletrônicos.',
+      'Montar e desmontar eletrônicos.',
+      'Projetar e construir equipamentos mecânicos para produção agrícola.',
+      'Saber arrumar carros e motos.',
+      'Fazer reparos em veículos.',
+      'Fazer manutenção em aviões, helicópteros e satélites.',
+      'Consertar computadores.',
+      'Trabalhar operando máquinas e equipamentos.',
+      'Trabalhar em oficina mecânica.',
+      'Desenvolver equipamentos/ instrumentos/ processos tecnológicos.',
+      'Construir objetos de madeira.',
+      'Consertar a parte mecânica de veículos.',
+      'Projetar, construir e operar equipamentos utilizados na previsão do tempo (Meteorologista).',
+      'Fazer consertos elétricos.',
+      'Construir móveis.',
+      'Fazer manutenção de sítios.',
+      'Trabalhar com mecânica de aeronaves.',
+      'Fazer conserto mecânico.',
+      'Arrumar o motor de um carro com defeito.',
+      'Projetar sistemas de automação para elevadores, robôs e eletrodomésticos.',
+      'Fazer a instalação elétrica de uma casa.',
+      'Soldar objetos.',
+      'Trabalhar em cooperativas de pescadores.',
+      'Desenhar objetos e equipamentos.',
+      'Trabalhar com a instalação e manutenção de sistemas de transmissão: telefone, internet e TV.',
+    ]
+  },
+  { id:'I', name:'Investigativo', emoji:'🔬', color:'#046c94',
+    hBg:'linear-gradient(135deg,#044e6e,#046c94)',
+    desc:'Pesquisa, análise científica e resolução de problemas',
+    q:[
+      'Escrever um relatório de uma experiência científica.',
+      'Redigir um artigo científico.',
+      'Fazer diagnóstico de doenças.',
+      'Fazer experimentos químicos.',
+      'Manter-me atualizado sobre novidades científicas.',
+      'Assistir a uma demonstração de uma teoria científica.',
+      'Ler sobre uma teoria científica.',
+      'Desenvolver pesquisas sobre temas ambientais.',
+      'Entender as teorias sobre a origem do universo.',
+      'Entender os mecanismos biológicos de produtos cosméticos.',
+      'Saber simplificar fórmulas matemáticas.',
+      'Explicar fenômenos científicos.',
+      'Buscar respostas para problemas não solucionados.',
+      'Estudar detalhadamente um tema/fenômeno e suas diferentes explicações.',
+      'Realizar pesquisas sobre o corpo humano.',
+      'Estudar física/e ou matemática.',
+      'Planejar experimentos científicos.',
+      'Estudar as relações entre os seres vivos e o meio ambiente.',
+      'Estudar a história de diferentes culturas.',
+      'Pesquisar e criar produtos para a indústria química.',
+      'Trabalhar com pesquisas.',
+      'Buscar soluções para problemas científicos.',
+    ]
+  },
+  { id:'A', name:'Artístico', emoji:'🎨', color:'#9b59b6',
+    hBg:'linear-gradient(135deg,#6c3483,#9b59b6)',
+    desc:'Criatividade, expressão artística e liberdade de criação',
+    q:[
+      'Fazer projetos artísticos utilizando desenho, pintura, escultura e outras artes gráficas.',
+      'Desenhar ou pintar.',
+      'Fazer artesanatos.',
+      'Avaliar a necessidade de restauração de peças de um museu.',
+      'Fazer obras de arte.',
+      'Trabalhar com artistas (músicos, escritores ou pintores).',
+      'Ensaiar bailarinos e outros artistas para um espetáculo.',
+      'Aprender sobre arte, literatura ou música.',
+      'Conviver com artistas talentosos.',
+      'Planejar e organizar uma filmagem.',
+      'Participar de um grupo musical.',
+      'Estudar diversos gêneros literários, história da arte e música.',
+      'Gerenciar atividades de lazer e turismo.',
+      'Aprender um instrumento musical.',
+      'Escrever novelas e filmes.',
+      'Preparar escultura ou pintura.',
+      'Projetar a decoração de ambientes diversos.',
+      'Escrever, dirigir e produzir peças teatrais.',
+      'Realizar trabalhos fotográficos.',
+      'Criar uma coleção de roupas.',
+      'Expressar alguma ideia por meio de uma pintura ou desenho.',
+      'Compor uma música ou arranjo.',
+      'Criar músicas instrumentais, vocais e eletrônicas.',
+      'Escrever um livro.',
+      'Atuar em uma peça de teatro.',
+      'Tocar instrumento em um grupo musical.',
+      'Criar projetos artísticos para exposições, programas de rádio, TV e espetáculos de dança, teatro.',
+      'Apresentar um show para divertir adultos e/ou crianças.',
+      'Cuidar de jardins.',
+      'Consertar roupas.',
+    ]
+  },
+  { id:'S', name:'Social', emoji:'🤝', color:'#e74c3c',
+    hBg:'linear-gradient(135deg,#b03a2e,#e74c3c)',
+    desc:'Ajudar, ensinar e trabalhar com pessoas',
+    q:[
+      'Conhecer as funções dos alimentos e elaborar cardápios.',
+      'Prestar assistência a pessoas com problemas de saúde.',
+      'Trabalhar em centros de reabilitação de alcoolistas.',
+      'Trabalhar ajudando pessoas se desenvolverem e resolverem seus problemas de relacionamento.',
+      'Trabalhar na reabilitação de crianças, adultos e idosos com problemas físicos ou emocionais.',
+      'Aconselhar pessoas que estão com problemas.',
+      'Trabalhar com pessoas com necessidades especiais.',
+      'Ensinar crianças com necessidades especiais.',
+      'Auxiliar crianças com dificuldades na fala, audição, leitura e escrita.',
+      'Aprender sobre formas de relacionamento entre as pessoas.',
+      'Auxiliar pessoas com dificuldades de se integrar na vida social.',
+      'Auxiliar pessoas com dificuldade de relacionamento.',
+      'Ajudar casais em crise conjugal.',
+      'Trabalhar com seguros, previdências e planos de saúde.',
+      'Atuar na orientação de alunos com problemas.',
+      'Assistir pessoas doentes ou hospitalizadas.',
+      'Ser voluntário em asilos de idosos.',
+      'Ajudar pessoas em situação de risco.',
+      'Ajudar pessoas em situação de tensão.',
+      'Acalmar pessoas desesperadas.',
+      'Trabalhar com ensino.',
+      'Ajudar os doentes.',
+      'Trabalhar na área de educação.',
+      'Ensinar as pessoas.',
+      'Compreender as razões dos comportamentos humanos.',
+    ]
+  },
+  { id:'E', name:'Empreendedor', emoji:'💼', color:'#f5a623',
+    hBg:'linear-gradient(135deg,#b07d00,#f5a623)',
+    desc:'Liderança, negócios e persuasão',
+    q:[
+      'Coordenar projetos.',
+      'Ser líder de um grupo de trabalho.',
+      'Aprender a gerenciar e liderar uma organização.',
+      'Trabalhar como supervisor de outras pessoas.',
+      'Ser líder de um grupo.',
+      'Conduzir uma equipe para o sucesso no trabalho.',
+      'Ser um executivo de uma grande empresa.',
+      'Distribuir tarefas para um grupo de trabalho.',
+      'Coordenar e organizar eventos.',
+      'Ter meu próprio negócio.',
+      'Criar "jingles" comerciais, propagandas para outdoors e websites.',
+      'Trabalhar com vendas de produtos.',
+      'Fazer propaganda de um novo produto.',
+      'Participar de campanhas publicitárias.',
+      'Comprar e vender ações.',
+      'Gerenciar e supervisionar o trabalho de outras pessoas.',
+      'Criar símbolos para propagandas de produtos.',
+      'Ter uma empresa bem sucedida.',
+      'Alcançar sucesso na liderança de uma equipe.',
+      'Trabalhar com a manutenção de negócios.',
+      'Criar estratégias para a valorização de uma empresa.',
+      'Liderar campanhas publicitárias.',
+      'Organizar um grupo para a venda de um produto.',
+      'Convencer pessoas.',
+      'Trabalhar com a gestão de pessoas.',
+      'Montar minha própria empresa.',
+      'Manter boas relações de trabalho.',
+    ]
+  },
+  { id:'C', name:'Convencional', emoji:'📊', color:'#447c54',
+    hBg:'linear-gradient(135deg,#2d5e3a,#447c54)',
+    desc:'Organização, dados e trabalho estruturado',
+    q:[
+      'Fazer a contabilidade financeira.',
+      'Ser responsável pelas finanças de uma empresa.',
+      'Montar planilhas no computador.',
+      'Controlar a folha de pagamento de uma empresa.',
+      'Calcular imposto de renda.',
+      'Verificar possíveis defeitos em produtos.',
+      'Criar um sistema de registro de gastos em uma empresa.',
+      'Revisar detalhadamente documentos.',
+      'Classificar e organizar documentos de um arquivo.',
+      'Revisar a contabilidade de uma empresa.',
+      'Organizar bibliotecas ou centros de documentação.',
+      'Fazer controle financeiro.',
+      'Organizar a contabilidade financeira de uma empresa.',
+      'Estudar economia, contabilidade financeira de uma empresa.',
+      'Representar uma empresa nas questões comerciais e jurídicas.',
+      'Trabalhar com investimentos bancários.',
+      'Conferir relatórios de trabalho.',
+      'Organizar arquivos ou livros.',
+      'Organizar os arquivos de documentos de uma empresa.',
+      'Organizar um banco de dados com os horários de entrada e saída dos funcionários.',
+      'Trabalhar como digitador.',
+      'Organizar planilhas de fluxo de caixa.',
+      'Fazer serviço burocráticos.',
+      'Gerenciar o setor de logística de uma indústria.',
+      'Conferir documentos em busca de erros.',
+    ]
+  }
+];
+
+/* ===== PROFISSÕES ===== */
+const PROF = {
+  R:{ trad:['Mecânico','Engenheiro Mecânico','Eletricista','Piloto','Técnico em Eletrônica','Agrônomo','Carpinteiro','Técnico em Redes','Bombeiro','Fazendeiro'],
+      fut:[{n:'Técnico em Energia Solar',w:'🌞 Setor que mais cresce no Brasil — +90% ao ano (ANEEL, 2024)'},{n:'Engenheiro de Hidrogênio Verde',w:'💧 Combustível do futuro, forte investimento global até 2030 (IEA)'},{n:'Técnico em Turbinas Eólicas',w:'🌬️ +40% de crescimento previsto até 2032 (IEA, 2024)'},{n:'Operador de Drones Agrícolas',w:'🚁 Agritech em expansão acelerada no agronegócio brasileiro'},{n:'Técnico em Armazenamento de Energia (Baterias)',w:'⚡ Peça-chave na transição energética global'}],
+      links:[{l:'Profissões Realistas — O*NET',u:'https://www.onetonline.org/find/descriptor/browse/Interests/1.B.1/'},{l:'Carreiras em Energia Renovável',u:'https://www.irecbrazil.org/'}] },
+  I:{ trad:['Biólogo','Médico','Químico','Físico','Matemático','Geólogo','Farmacêutico','Antropólogo','Psicólogo'],
+      fut:[{n:'Cientista de Dados em Clima',w:'🌍 Alta demanda na luta contra as mudanças climáticas'},{n:'Pesquisador de Inteligência Artificial',w:'🤖 IA é a maior revolução tecnológica desde a internet'},{n:'Bioinformata',w:'🧬 Junção de biologia + computação — campo em explosão global'},{n:'Engenheiro de Genoma / Biodesigner',w:'🔬 CRISPR e edição genética transformarão a medicina'},{n:'Especialista em Computação Quântica',w:'⚛️ Computadores quânticos serão bilhões de vezes mais rápidos'}],
+      links:[{l:'Profissões Investigativas — O*NET',u:'https://www.onetonline.org/find/descriptor/browse/Interests/1.B.2/'},{l:'AI Index — Stanford',u:'https://aiindex.stanford.edu/'}] },
+  A:{ trad:['Designer Gráfico','Arquiteto','Jornalista','Ator','Músico','Fotógrafo','Escritor','Cineasta','Dramaturgo','Escultor'],
+      fut:[{n:'Designer de Experiência (UX/UI)',w:'📱 Toda empresa digital precisa — demanda 300% maior em 5 anos'},{n:'Artista de Realidade Virtual e Metaverso',w:'🥽 Mercado de R$ 1,3 trilhões previsto para 2026 (McKinsey)'},{n:'Criador de Conteúdo Digital / Creator',w:'🎬 Economia criativa já emprega +5 mi no Brasil'},{n:'Designer de Impressão 3D e Fabricação Digital',w:'🖨️ Aplicado em medicina, moda e construção civil'},{n:'Compositor de IA (Music Technologist)',w:'🎵 Fusão de criatividade humana com tecnologia de áudio'}],
+      links:[{l:'Profissões Artísticas — O*NET',u:'https://www.onetonline.org/find/descriptor/browse/Interests/1.B.3/'},{l:'Economia Criativa no Brasil',u:'https://www.gov.br/turismo/pt-br/assuntos/economia-criativa'}] },
+  S:{ trad:['Professor','Psicólogo','Assistente Social','Enfermeiro','Terapeuta','Orientador','Pedagogo','Nutricionista','Conselheiro'],
+      fut:[{n:'Especialista em Saúde Mental Digital',w:'🧠 +30% da população terá doenças mentais até 2030 (OMS)'},{n:'Terapeuta de Jogos / Game Therapy',w:'🎮 Games terapêuticos: mercado de US$ 3 bi em expansão'},{n:'Especialista em Inclusão e Diversidade (DEI)',w:'🌈 Cada vez mais obrigatório em empresas e instituições'},{n:'Conselheiro de Bem-Estar Corporativo',w:'💙 Burnout custa R$ 350 bi/ano às empresas brasileiras'},{n:'Gerontólogo (especialista em envelhecimento)',w:'👴 Brasil terá mais idosos que jovens até 2040 (IBGE)'}],
+      links:[{l:'Profissões Sociais — O*NET',u:'https://www.onetonline.org/find/descriptor/browse/Interests/1.B.4/'},{l:'OMS — Saúde Mental Global',u:'https://www.who.int/health-topics/mental-health'}] },
+  E:{ trad:['Administrador','Advogado','Corretor','Gerente de Vendas','Publicitário','Executivo','Empreendedor'],
+      fut:[{n:'Empreendedor de Tecnologia Verde (GreenTech)',w:'🌱 Investimento global em cleantech: US$ 1,7 tri até 2030'},{n:'Gestor de Projetos de Impacto Social (ESG)',w:'📋 ESG é obrigatório para empresas listadas na bolsa'},{n:'Especialista em Blockchain e Criptoativos',w:'🔗 Tecnologia que substituirá parte do sistema financeiro'},{n:'Gestor de Startups de Saúde (Healthtech)',w:'🏥 Setor de healthtech cresceu 500% no Brasil (2020-2024)'},{n:'Especialista em Marketing Digital e Influência',w:'📲 Publicidade digital já supera TV e impresso no Brasil'}],
+      links:[{l:'Profissões Empreendedoras — O*NET',u:'https://www.onetonline.org/find/descriptor/browse/Interests/1.B.5/'},{l:'Sebrae — Empreendedorismo Jovem',u:'https://sebrae.com.br/sites/PortalSebrae/ufs/'}] },
+  C:{ trad:['Contador','Auditor','Secretário','Bibliotecário','Analista Financeiro','Técnico Administrativo','Controlador de Estoque'],
+      fut:[{n:'Especialista em Proteção de Dados (DPO / LGPD)',w:'🔒 Lei exige DPO em empresas — carreira em alta no Brasil'},{n:'Auditor de Inteligência Artificial',w:'🤖 IA precisa de auditores humanos para garantir ética e precisão'},{n:'Analista de Compliance Digital',w:'📋 Regulações digitais explodiram — profissão escassíssima'},{n:'Gestor de Banco de Dados em Nuvem (Cloud)',w:'☁️ 90% das empresas estarão 100% em nuvem até 2028'},{n:'Especialista em Cibersegurança Regulatória',w:'🛡️ Falhas de segurança custam US$ 4,5 mi por incidente (IBM, 2024)'}],
+      links:[{l:'Profissões Convencionais — O*NET',u:'https://www.onetonline.org/find/descriptor/browse/Interests/1.B.6/'},{l:'Proteção de Dados — ANPD Brasil',u:'https://www.gov.br/anpd/pt-br'}] }
+};
+
+/* ===== STATE ===== */
+let student={}, curSec=0, answers={};
+
+/* ===== ACCESSIBILITY ===== */
+function applyA11y(){
+  const b=document.body;
+  b.classList.toggle('a11y-high-contrast',document.getElementById('chkHC').checked);
+  b.classList.toggle('a11y-dyslexia',document.getElementById('chkDy').checked);
+  b.classList.toggle('a11y-no-anim',document.getElementById('chkNA').checked);
+}
+function setFont(s){
+  const b=document.body;
+  b.classList.remove('a11y-large','a11y-xlarge');
+  ['fN','fL','fX'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('active');el.setAttribute('aria-pressed','false')});
+  if(s==='l'){b.classList.add('a11y-large');document.getElementById('fL').classList.add('active');document.getElementById('fL').setAttribute('aria-pressed','true')}
+  else if(s==='x'){b.classList.add('a11y-xlarge');document.getElementById('fX').classList.add('active');document.getElementById('fX').setAttribute('aria-pressed','true')}
+  else{document.getElementById('fN').classList.add('active');document.getElementById('fN').setAttribute('aria-pressed','true')}
+}
+document.getElementById('a11yToggleBtn').addEventListener('click',function(){
+  const p=document.getElementById('a11yPanel');
+  const o=p.classList.toggle('open');
+  this.setAttribute('aria-expanded',o);
+});
+
+/* ===== NAVIGATION ===== */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function startIntro(){
+  const n=document.getElementById('iNome').value.trim();
+  const r=document.getElementById('iRA').value.trim();
+  const t=document.getElementById('sTurma').value;
+  const e=document.getElementById('formErr');
+  if(!n||!r||!t){e.style.display='block';return}
+  e.style.display='none';
+  student={nome:n,ra:r,turma:t};
+  showScreen('sIntro');
+}
+function startAssessment(){curSec=0;answers={};renderSec(0);showScreen('sQuiz')}
+
+/* ===== QUIZ ===== */
+const LABELS=['Realista','Investigativo','Artístico','Social','Empreendedor','Convencional'];
+function renderSec(idx){
+  const sec=SECTIONS[idx];
+  const isLast=idx===SECTIONS.length-1;
+
+  document.getElementById('qHeader').innerHTML=`
+    <div class="section-header" style="background:${sec.hBg}" role="region" aria-label="Fase ${idx+1}: ${sec.name}">
+      <div class="section-icon" aria-hidden="true">${sec.emoji}</div>
+      <div><h2>Fase ${idx+1}/6 — Tipo ${sec.name}</h2><p>${sec.desc}</p></div>
+    </div>`;
+
+  const pct=Math.round(idx/6*100);
+  document.getElementById('progLabel').textContent=`Fase ${idx+1} de 6`;
+  document.getElementById('progPct').textContent=pct+'%';
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progBar').setAttribute('aria-valuenow',pct);
+
+  for(let i=0;i<6;i++){
+    const d=document.getElementById('d'+i);
+    d.className='step-dot'+(i<idx?' done':i===idx?' current':'');
+    d.setAttribute('aria-label',`Fase ${i+1}: ${LABELS[i]}${i<idx?' (concluída)':i===idx?' (atual)':''}`);
+  }
+
+  let html='';
+  sec.q.forEach((q,qi)=>{
+    const key=`${sec.id}_${qi}`,sv=answers[key];
+    html+=`<div class="question-card" id="qc_${key}">
+      <div class="question-num" aria-hidden="true">${sec.id} — ${qi+1}/${sec.q.length}</div>
+      <div class="question-text" id="ql_${key}">${qi+1}. ${q}</div>
+      <div class="likert-labels" aria-hidden="true"><span>Nenhum</span><span>Pouco</span><span>Bastante</span><span>Muito</span></div>
+      <div class="likert-scale" role="radiogroup" aria-labelledby="ql_${key}">
+        ${LIKERT.map(o=>`<button class="option-btn${sv===o.value?' selected':''}" role="radio" aria-checked="${sv===o.value}" aria-label="${o.title}" title="${o.title}" onclick="selAns('${key}',${o.value},this)"><span class="oe" aria-hidden="true">${o.emoji}</span><span>${o.label}</span></button>`).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('qList').innerHTML=html;
+
+  document.getElementById('btnPrev').style.display=idx>0?'inline-flex':'none';
+  const bn=document.getElementById('btnNext');
+  if(isLast){bn.textContent='✅ Finalizar e ver meus resultados!';bn.className='btn btn-green'}
+  else{bn.textContent='Próxima fase →';bn.className='btn btn-primary'}
+  updCount();
+}
+function selAns(key,val,btn){
+  answers[key]=val;
+  document.getElementById('qc_'+key).querySelectorAll('.option-btn').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-checked','false')});
+  btn.classList.add('selected');btn.setAttribute('aria-checked','true');
+  updCount();
+}
+function updCount(){
+  const sec=SECTIONS[curSec],tot=sec.q.length;
+  let done=0;sec.q.forEach((_,qi)=>{if(answers[`${sec.id}_${qi}`]!==undefined)done++});
+  document.getElementById('ansCount').textContent=`${done} de ${tot} respondidas`;
+}
+function nextSec(){
+  const sec=SECTIONS[curSec];
+  const unans=sec.q.map((_,qi)=>qi).filter(qi=>answers[`${sec.id}_${qi}`]===undefined);
+  if(unans.length>0){
+    const f=document.getElementById(`qc_${sec.id}_${unans[0]}`);
+    if(f){f.style.outline='3px solid var(--accent-red)';f.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>f.style.outline='',3000)}
+    alert(`⚠️ Você ainda tem ${unans.length} afirmação(ões) sem resposta. Por favor, responda todas antes de continuar.`);
+    return;
+  }
+  flash(`+${sec.q.length*10} XP — ${sec.name} concluído! 🎉`);
+  if(curSec<SECTIONS.length-1){curSec++;renderSec(curSec);window.scrollTo({top:0,behavior:'smooth'})}
+  else{showResults()}
+}
+function prevSec(){if(curSec>0){curSec--;renderSec(curSec);window.scrollTo({top:0,behavior:'smooth'})}}
+function flash(msg){const el=document.createElement('div');el.className='xp-flash';el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),2300)}
+
+/* ===== SCORING — média simples por tipo (escala 1–4, conforme ATPH) ===== */
+function calcScores(){
+  const sc={};
+  SECTIONS.forEach(sec=>{
+    const vals=sec.q.map((_,qi)=>answers[`${sec.id}_${qi}`]).filter(v=>v!==undefined);
+    sc[sec.id]=vals.length>0?vals.reduce((a,b)=>a+b,0)/vals.length:0;
+  });
+  return sc;
+}
+
+/* ===== RESULTS ===== */
+function showResults(){
+  const sc=calcScores();
+  const sorted=Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+  const top3=sorted.slice(0,3).map(([id])=>id);
+  const code=top3.join('');
+
+  showScreen('sResults');
+  document.getElementById('riasecCode').textContent=code;
+  document.getElementById('resSub').textContent=`Parabéns, ${student.nome}! Seu perfil é ${top3.map(id=>SECTIONS.find(s=>s.id===id).name).join(' + ')}.`;
+
+  const COLS={R:'#e07b39',I:'#046c94',A:'#9b59b6',S:'#e74c3c',E:'#f5a623',C:'#447c54'};
+  document.getElementById('barChart').innerHTML=SECTIONS.map(sec=>{
+    const s=sc[sec.id],pct=(s/4*100).toFixed(0),top=top3.includes(sec.id);
+    return `<div class="bar-row">
+      <div class="bar-label">${sec.emoji} ${sec.name}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;background:${COLS[sec.id]}${top?'':'99'}" data-t="${pct}" aria-label="${s.toFixed(2)} de 4,00">${top?'⭐':''}</div></div>
+      <div class="bar-score">${s.toFixed(2)}</div>
+    </div>`;
+  }).join('');
+  setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>{b.style.transition='width 1s cubic-bezier(.34,1.56,.64,1)';b.style.width=b.dataset.t+'%'}),100);
+
+  const RE=['🥇','🥈','🥉'];
+  document.getElementById('top3Container').innerHTML=top3.map((id,ri)=>{
+    const sec=SECTIONS.find(s=>s.id===id),p=PROF[id];
+    return `<div class="result-type-section">
+      <div class="result-type-header" style="background:${sec.hBg}">
+        <div class="rank-badge" aria-hidden="true">${RE[ri]}</div>
+        <div class="type-info"><h3>${sec.emoji} ${sec.name}</h3><p>${sec.desc}</p></div>
+      </div>
+      <div class="result-type-body">
+        <div class="professions-group">
+          <h4>🏛️ Profissões tradicionais</h4>
+          <div class="profession-chips">${p.trad.map(t=>`<span class="prof-chip">${t}</span>`).join('')}</div>
+        </div>
+        <div class="professions-group">
+          <h4>🚀 Profissões do futuro <span class="future-badge">📈 Alta demanda</span></h4>
+          <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.4rem">
+            ${p.fut.map(f=>`<div style="background:var(--off-white);border-radius:var(--radius-sm);padding:.6rem .9rem;border:1px solid var(--gray-light)"><strong style="font-size:.9rem">${f.n}</strong><div style="font-size:.8rem;color:var(--text-soft);margin-top:.15rem">${f.w}</div></div>`).join('')}
+          </div>
+        </div>
+        <div class="professions-group">
+          <h4>🔗 Saiba mais</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+            ${p.links.map(lk=>`<a href="${lk.u}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--blue-mid);font-weight:700;text-decoration:underline">${lk.l} ↗</a>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // ENVIO AUTOMÁTICO ao finalizar
+  saveToSheets(sc,code);
+}
+
+/* ===== SAVE — automático ao finalizar ===== */
+async function saveToSheets(sc,code){
+  const st=document.getElementById('saveStatus');
+  st.style.display='block';
+  if(!SHEETS_URL||SHEETS_URL==='COLE_AQUI_A_URL_DO_APPS_SCRIPT'){
+    st.className='save-status error';
+    st.textContent='⚠️ Integração com planilha não configurada. Peça ao professor para configurar o Apps Script.';
+    return;
+  }
+  st.className='save-status saving';
+  st.textContent='💾 Salvando seus resultados na planilha do professor...';
+  const payload={
+    timestamp:new Date().toLocaleString('pt-BR'),
+    nome:student.nome,ra:student.ra,turma:student.turma,
+    R:sc.R.toFixed(4),I:sc.I.toFixed(4),A:sc.A.toFixed(4),
+    S:sc.S.toFixed(4),E:sc.E.toFixed(4),C:sc.C.toFixed(4),
+    codigo:code
+  };
+  try{
+    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
+    st.className='save-status success';
+    st.textContent='✅ Resultado salvo! Seu professor já pode visualizar seus dados.';
+  }catch(e){
+    st.className='save-status error';
+    st.textContent='❌ Não foi possível salvar automaticamente. Verifique sua conexão ou avise o professor.';
+  }
+}
+
+function restartQuiz(){
+  if(!confirm('Tem certeza? Todas as respostas serão apagadas.'))return;
+  answers={};curSec=0;showScreen('sWelcome');
+}
+</script>
+</body>
+</html>
