@@ -519,9 +519,9 @@ hr{border:none;border-top:2px solid var(--gray-light);margin:1.25rem 0}
        
       ✅ Não existe resposta certa ou errada!<br>
       ✅ Responda pelo que você <em>genuinamente</em> curte fazer — sem pensar no que seria "melhor";<br>
-      ✅ Ao final, você recebe seu <strong>Código RIASEC</strong> personalizado com profissões que combinam com você!<br> 
-       
+      ✅ Ao final, você recebe seu <strong>Código RIASEC</strong> personalizado com profissões que combinam com você!<br>
     </p>
+     
   </div>
   <div class="nav-footer">
     <button class="btn btn-ghost" onclick="showScreen('sWelcome')">← Voltar</button>
@@ -1026,11 +1026,11 @@ function drawHexagon(sc){
   types.forEach((t,i)=>{
     const score=sc[t]||0;
     const sv=vtx(i,R*score/4);
-    const lv=vtx(i,R+22);
-    const lv2=vtx(i,R+34);
+    const lv=vtx(i,R+30);
+    const lv2=vtx(i,R+46);
     dots+=`<circle cx="${sv.x.toFixed(1)}" cy="${sv.y.toFixed(1)}" r="5" fill="${COLS[t]}" stroke="white" stroke-width="1.5"/>`;
-    labels+=`<text x="${lv.x.toFixed(1)}" y="${lv.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="900" fill="${COLS[t]}">${SHORT[t]}</text>`;
-    labels+=`<text x="${lv2.x.toFixed(1)}" y="${lv2.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,.85)">${score.toFixed(2)}</text>`;
+    labels+=`<text x="${lv.x.toFixed(1)}" y="${lv.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="17" font-weight="900" fill="${COLS[t]}">${SHORT[t]}</text>`;
+    labels+=`<text x="${lv2.x.toFixed(1)}" y="${lv2.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="rgba(255,255,255,.95)">${score.toFixed(2)}</text>`;
   });
 
   // Marcas de escala no eixo R (direita visual)
@@ -1040,7 +1040,7 @@ function drawHexagon(sc){
     scaleMks+=`<text x="${(sv.x+5).toFixed(1)}" y="${sv.y.toFixed(1)}" font-family="Nunito,sans-serif" font-size="8" fill="rgba(255,255,255,.5)" dominant-baseline="middle">${v}</text>`;
   });
 
-  return `<svg viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;margin:0 auto;display:block" role="img" aria-label="Gráfico hexagonal dos tipos RIASEC">
+  return `<svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;margin:0 auto;display:block" role="img" aria-label="Gráfico hexagonal dos tipos RIASEC">
     ${grid}${axes}
     <polygon points="${scorePts}" fill="rgba(152,200,71,.25)" stroke="#98c847" stroke-width="2.5" stroke-linejoin="round"/>
     ${scaleMks}${dots}${labels}
