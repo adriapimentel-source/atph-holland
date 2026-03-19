@@ -179,7 +179,99 @@ body{font-family:var(--font-main);font-size:var(--font-size-base);line-height:va
 .save-status.saving{background:#e8f4fb;color:var(--blue-mid)}
 .save-status.success{background:#edfaf0;color:var(--green-dark)}
 .save-status.error{background:#fef0ef;color:#c0392b}
-@media(max-width:600px){.hero-banner h2{font-size:1.4rem}.type-cards-grid{grid-template-columns:1fr}.code-reveal{font-size:2.5rem}.card{padding:1.25rem}.option-btn{font-size:.8rem}.section-header{flex-direction:column;text-align:center}.bar-label{width:90px;font-size:.78rem}}
+/* ============================================================
+   MOBILE — tela pequena (a maioria dos alunos)
+   ============================================================ */
+@media(max-width:600px){
+  /* App wrapper: menos padding lateral */
+  .app-wrapper{padding:.5rem}
+
+  /* Header compacto */
+  .site-header{padding:.75rem 1rem;border-radius:0 0 12px 12px;margin-bottom:1rem}
+  .brand-text h1{font-size:1rem}
+  .brand-text p{font-size:.72rem}
+  .brand-logo{width:40px;height:40px}
+  .a11y-toggle-btn{font-size:.78rem;padding:.35rem .65rem}
+  .a11y-toggle-btn svg{width:17px;height:17px}
+
+  /* Hero */
+  .hero-banner{padding:1.75rem 1.25rem}
+  .hero-banner h2{font-size:1.3rem}
+  .hero-emoji{font-size:3rem}
+
+  /* Cards */
+  .card{padding:1rem}
+
+  /* Type cards: 1 coluna */
+  .type-cards-grid{grid-template-columns:1fr}
+
+  /* Section header no quiz */
+  .section-header{flex-direction:column;text-align:center;padding:1rem;gap:.6rem}
+  .section-icon{width:46px;height:46px;font-size:1.5rem}
+  .section-header h2{font-size:1.1rem}
+
+  /* Question card: mais compacto */
+  .question-card{padding:1rem;margin-bottom:.65rem}
+  .question-text{font-size:.9rem;margin-bottom:.7rem}
+
+  /* LIKERT — ponto crítico no celular
+     Em vez de 4 botões lado a lado (apertado),
+     usa 2x2 grid em telas muito pequenas         */
+  .likert-labels{display:none} /* esconde labels de texto, info está no título do botão */
+  .likert-scale{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.5rem
+  }
+  .option-btn{
+    padding:.75rem .4rem;
+    font-size:.85rem;
+    border-radius:12px;
+    min-height:64px
+  }
+  .option-btn .oe{font-size:1.5rem}
+
+  /* Instruction band */
+  .instruction-band{font-size:.82rem;padding:.6rem .85rem}
+
+  /* Progress dots: menores */
+  .step-dot{width:24px;height:24px;font-size:.65rem}
+
+  /* Nav footer: botões empilhados */
+  .nav-footer{flex-direction:column;gap:.6rem}
+  .nav-footer .btn{width:100%;justify-content:center}
+  .questions-answered{text-align:center}
+
+  /* Resultados */
+  .code-reveal{font-size:2.4rem;letter-spacing:.15em}
+  .results-hero{padding:1.75rem 1rem}
+  .bar-label{width:80px;font-size:.75rem}
+  .bar-score{width:30px;font-size:.75rem}
+  .chart-container{padding:1rem}
+
+  /* Links de recursos: 1 coluna */
+  .link-cards-row{grid-template-columns:1fr}
+
+  /* Form row: empilhado */
+  .form-row{grid-template-columns:1fr}
+
+  /* XP flash: menor e mais abaixo */
+  .xp-flash{bottom:1rem;right:.75rem;font-size:.95rem;padding:.6rem 1rem}
+}
+
+/* Telas muito pequenas (abaixo de 380px — ex: iPhone SE) */
+@media(max-width:380px){
+  .likert-scale{grid-template-columns:1fr 1fr;gap:.4rem}
+  .option-btn{min-height:58px;font-size:.8rem}
+  .brand-text h1{font-size:.9rem}
+  .section-header h2{font-size:1rem}
+}
+
+/* Touch: área de toque maior nos botões de opção */
+@media(hover:none) and (pointer:coarse){
+  .option-btn{min-height:56px;-webkit-tap-highlight-color:transparent}
+  .btn{min-height:48px;-webkit-tap-highlight-color:transparent}
+}
 .mt1{margin-top:.5rem}.mt2{margin-top:1rem}.mb1{margin-bottom:.5rem}.mb2{margin-bottom:1rem}.fw9{font-weight:900}.cb{color:var(--blue-mid)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 hr{border:none;border-top:2px solid var(--gray-light);margin:1.25rem 0}
 </style>
