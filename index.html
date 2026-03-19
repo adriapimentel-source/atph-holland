@@ -296,11 +296,45 @@ hr{border:none;border-top:2px solid var(--gray-light);margin:1.25rem 0}
         <label for="sTurma">Turma <span style="color:var(--accent-red)">*</span></label>
         <select id="sTurma" required aria-required="true">
           <option value="" disabled selected>Selecione sua turma</option>
-          <option value="I3A">I3A</option>
-          <option value="I3B">I3B</option>
-          <option value="M3A">M3A</option>
-          <option value="M3B">M3B</option>
-          <option value="M3C">M3C</option>
+          <optgroup label="1º Ano — Turno A">
+            <option value="1AA">1AA</option>
+            <option value="1AB">1AB</option>
+            <option value="1AC">1AC</option>
+            <option value="1AD">1AD</option>
+            <option value="1AE">1AE</option>
+          </optgroup>
+          <optgroup label="1º Ano — Turno B">
+            <option value="1BA">1BA</option>
+            <option value="1BB">1BB</option>
+            <option value="1BC">1BC</option>
+            <option value="1BD">1BD</option>
+            <option value="1BE">1BE</option>
+          </optgroup>
+          <optgroup label="2º Ano — Turno A">
+            <option value="2AA">2AA</option>
+            <option value="2AB">2AB</option>
+            <option value="2AC">2AC</option>
+            <option value="2AD">2AD</option>
+          </optgroup>
+          <optgroup label="2º Ano — Turno B">
+            <option value="2BA">2BA</option>
+            <option value="2BB">2BB</option>
+            <option value="2BC">2BC</option>
+            <option value="2BD">2BD</option>
+          </optgroup>
+          <optgroup label="2º Ano — Turno C">
+            <option value="2CA">2CA</option>
+            <option value="2CB">2CB</option>
+            <option value="2CC">2CC</option>
+            <option value="2CD">2CD</option>
+          </optgroup>
+          <optgroup label="3º Ano">
+            <option value="I3A">I3A</option>
+            <option value="I3B">I3B</option>
+            <option value="M3A">M3A</option>
+            <option value="M3B">M3B</option>
+            <option value="M3C">M3C</option>
+          </optgroup>
         </select>
       </div>
     </div>
@@ -921,13 +955,21 @@ async function saveToSheets(sc,code){
   st.className='save-status saving';
   st.textContent='💾 Salvando seus resultados na planilha do professor...';
   try{
-    const params=new URLSearchParams({
+    // Monta objeto com dados gerais + todas as 154 respostas individuais
+    const payload={
       timestamp:new Date().toLocaleString('pt-BR'),
       nome:student.nome,ra:student.ra,turma:student.turma,
       R:sc.R.toFixed(4),I:sc.I.toFixed(4),A:sc.A.toFixed(4),
       S:sc.S.toFixed(4),E:sc.E.toFixed(4),C:sc.C.toFixed(4),
       codigo:code
+    };
+    // Adiciona cada resposta individual: R_1, R_2, ... I_1, ... C_25
+    SECTIONS.forEach(sec=>{
+      sec.q.forEach((_,qi)=>{
+        payload[sec.id+'_'+(qi+1)] = answers[sec.id+'_'+qi] || '';
+      });
     });
+    const params=new URLSearchParams(payload);
     await fetch(SHEETS_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
     st.className='save-status success';
     st.textContent='✅ Resultado salvo! Seu professor já pode visualizar seus dados.';
