@@ -510,7 +510,7 @@ hr{border:none;border-top:2px solid var(--gray-light);margin:1.25rem 0}
 
 <script>
 /* ===== CONFIG ===== */
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwCPMNJ3enF-4JJ6xdSOKeb_twMz0ymIfWLdMSM1TxCyDXPhAKHGsrrjYXYmTFX8WGL/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzmWjiHeO4T1NwsT6hUHRh0khv-G7PDe2nds5t_ZRlnvAlXR1tx06JHuHBsk5Dqc5hn/exec';
 
 /* ===== ESCALA LIKERT — 4 opções (instrumento original ATPH) ===== */
 const LIKERT = [
@@ -918,22 +918,17 @@ function showResults(){
 async function saveToSheets(sc,code){
   const st=document.getElementById('saveStatus');
   st.style.display='block';
-  if(!SHEETS_URL||SHEETS_URL==='COLE_AQUI_A_URL_DO_APPS_SCRIPT'){
-    st.className='save-status error';
-    st.textContent='⚠️ Integração com planilha não configurada. Peça ao professor para configurar o Apps Script.';
-    return;
-  }
   st.className='save-status saving';
   st.textContent='💾 Salvando seus resultados na planilha do professor...';
-  const payload={
-    timestamp:new Date().toLocaleString('pt-BR'),
-    nome:student.nome,ra:student.ra,turma:student.turma,
-    R:sc.R.toFixed(4),I:sc.I.toFixed(4),A:sc.A.toFixed(4),
-    S:sc.S.toFixed(4),E:sc.E.toFixed(4),C:sc.C.toFixed(4),
-    codigo:code
-  };
   try{
-    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
+    const params=new URLSearchParams({
+      timestamp:new Date().toLocaleString('pt-BR'),
+      nome:student.nome,ra:student.ra,turma:student.turma,
+      R:sc.R.toFixed(4),I:sc.I.toFixed(4),A:sc.A.toFixed(4),
+      S:sc.S.toFixed(4),E:sc.E.toFixed(4),C:sc.C.toFixed(4),
+      codigo:code
+    });
+    await fetch(SHEETS_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
     st.className='save-status success';
     st.textContent='✅ Resultado salvo! Seu professor já pode visualizar seus dados.';
   }catch(e){
